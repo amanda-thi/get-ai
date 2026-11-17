@@ -152,6 +152,13 @@ cd frontend && npm install && npm run dev
 Jangan buka port 8080 ke internet publik. Akses lewat Tailscale atau Cloudflare Access.
 Backup: aktifkan backup harian Supabase (paket Pro) dan simpan `.env` terpisah dari repo.
 
+## Deploy ke Vercel (satu project, dua service)
+Repo ini bisa di-deploy sebagai **satu project Vercel** berisi service **backend** (FastAPI)
+dan **frontend** (Vite) — konfigurasi di [`vercel.json`](vercel.json), dengan `/api/*` diarahkan
+ke backend dan sisanya ke frontend (fallback SPA). Daftar environment variables, langkah deploy,
+dan **batasan penting** (scheduler APScheduler tidak otomatis di serverless, profil perusahaan
+tidak ikut ke bundle) ada di **[`DEPLOY_VERCEL.md`](DEPLOY_VERCEL.md)**.
+
 ## Testing
 `cd backend && python -m pytest` (251 test: util teks & web, klien DB, adapter SPSE/INAPROC, koleksi/dedupe,
 AI & validasi, analisis tender/lead, discovery lead, layanan outreach & mailer, router tenders/sources/leads/outreach,
