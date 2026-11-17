@@ -1,0 +1,23 @@
+# Sumber tunggal fakta perusahaan untuk AI marketing (Fase 3).
+# Isi HANYA dari website resmi greenecoteknologi.com / dokumen resmi.
+# Field kosong = AI dilarang membuat klaim tentang hal tersebut.
+company_name: PT Green Eco Teknologi
+website: https://greenecoteknologi.com
+contact:
+  email: ""
+  phone: ""
+  address: ""
+services:
+  - Desain dan pengembangan mesin
+  - Perbaikan dan pemeliharaan mesin
+  - Penggantian dan penyediaan pisau mesin crusher
+  - Penyediaan cutter mesin shredder
+  - Penyediaan suku cadang dan komponen mesin
+  - Solusi dan peralatan pendukung pengolahan lingkungan
+approved_claims: []  # sertifikasi, pengalaman proyek, kapasitas, dll. yang terverifikasi
+forbidden_claims_unless_listed_above:
+  - sertifikasi
+  - pengalaman proyek
+  - kapasitas produksi
+  - harga
+  - spesifikasi produk

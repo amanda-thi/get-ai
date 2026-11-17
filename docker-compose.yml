@@ -1,0 +1,17 @@
+services:
+  api:
+    build: ./backend
+    env_file: .env
+    restart: unless-stopped
+    # port tidak dipublish: hanya terjangkau lewat frontend/nginx
+  frontend:
+    build:
+      context: ./frontend
+      args:
+        VITE_SUPABASE_URL: ${VITE_SUPABASE_URL}
+        VITE_SUPABASE_ANON_KEY: ${VITE_SUPABASE_ANON_KEY}
+    ports:
+      - "8080:80"   # akses lewat Tailscale / Cloudflare Access, jangan buka ke internet publik
+    depends_on: [api]
+    restart: unless-stopped
+  # worker (scheduler) ditambahkan di Fase 4
