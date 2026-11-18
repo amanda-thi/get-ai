@@ -25,7 +25,7 @@ export default function Login() {
         <div className="flex items-center gap-3">
           <img className="logo" src="/logo.png" alt={t('Logo PT Green Eco Teknologi')} width="64" />
           <div>
-            <h1 className="m-0 text-lg font-semibold" style={{ color: 'var(--ptext)' }}>Green Eco AI</h1>
+            <h1 className="m-0 text-lg font-semibold" style={{ color: 'var(--ptext)' }}>Green Eco Teknologi</h1>
             <p className="sub m-0">{t('Business Automation')}</p>
           </div>
         </div>

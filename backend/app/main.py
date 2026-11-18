@@ -45,7 +45,7 @@ def create_app() -> FastAPI:
     logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(name)s: %(message)s")
     prod = s.app_env == "production"
     app = FastAPI(
-        title="Green Eco AI Business Automation",
+        title="Green Eco Teknologi Business Automation",
         docs_url=None if prod else "/docs",
         redoc_url=None,
         openapi_url=None if prod else "/openapi.json",

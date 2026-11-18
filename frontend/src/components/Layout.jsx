@@ -24,7 +24,7 @@ export default function Layout() {
       <aside className={`side ${open ? 'open' : ''}`}>
         <div className="brand">
           <img className="logo" src="/logo.png" alt={t('Logo PT Green Eco Teknologi')} width="44" />
-          Green Eco AI
+          Green Eco Teknologi
         </div>
         <nav onClick={() => setOpen(false)}>
           {nav.map(([to, label, icon], i) => (

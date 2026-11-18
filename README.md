@@ -1,4 +1,4 @@
-# Green Eco AI Business Automation — PT Green Eco Teknologi
+# Green Eco Teknologi — Business Automation
 
 Aplikasi internal: monitoring tender lingkungan + marketing outreach berbasis AI.
 

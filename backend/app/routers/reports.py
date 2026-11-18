@@ -379,7 +379,7 @@ def _xlsx_bytes(report: dict, raw: dict) -> bytes:
     def add(label="", value=""):
         ws.append([label, value])
 
-    add("Laporan", "Green Eco AI")
+    add("Laporan", "Green Eco Teknologi")
     add("Dibuat", report["generated_at"])
     add("Periode (hari)", report["period_days"])
     add()
@@ -520,7 +520,7 @@ def _pdf_bytes(report: dict) -> bytes:
         ]))
         story.append(tb)
 
-    story.append(Paragraph("Laporan Green Eco AI", styles["Title"]))
+    story.append(Paragraph("Laporan Green Eco Teknologi", styles["Title"]))
     story.append(Paragraph(
         _pdf_text(f"Dibuat: {report['generated_at']} · Periode: {report['period_days']} hari terakhir"),
         styles["Normal"],
@@ -589,7 +589,7 @@ def _pdf_bytes(report: dict) -> bytes:
 
     buf = io.BytesIO()
     doc = SimpleDocTemplate(
-        buf, pagesize=A4, title="Laporan Green Eco AI",
+        buf, pagesize=A4, title="Laporan Green Eco Teknologi",
         leftMargin=16 * mm, rightMargin=16 * mm, topMargin=16 * mm, bottomMargin=16 * mm,
     )
     doc.build(story)

@@ -234,7 +234,7 @@ def _notify_outcome(db: SupabaseClient, settings: Settings, config: dict, job: d
             message=summary or "Automation gagal dijalankan.",
             related_job_id=job["id"], link=f"/automation?job={job['id']}", dedupe_key=dedupe,
         )
-        maybe_email_admins(db, settings, f"[Green Eco AI] {name} gagal", summary or "Automation gagal dijalankan.")
+        maybe_email_admins(db, settings, f"[Green Eco Teknologi] {name} gagal", summary or "Automation gagal dijalankan.")
 
 
 def _backoff_seconds(config: dict, attempt: int) -> int:
@@ -265,7 +265,7 @@ def _fail(db: SupabaseClient, settings: Settings, config: dict, job: dict, error
         dedupe_key=f"job:{job['id']}:final",
     )
     maybe_email_admins(db, settings,
-                       f"[Green Eco AI] {config.get('automation_name') or job.get('job_type')} gagal",
+                       f"[Green Eco Teknologi] {config.get('automation_name') or job.get('job_type')} gagal",
                        error)
     return {"job_id": job["id"], "status": "failed", "error": error}
 

@@ -1,4 +1,4 @@
--- Green Eco AI Business Automation — skema awal
+-- Green Eco Teknologi — skema awal
 -- Jalankan di Supabase SQL Editor (urutan: 001 lalu 002).
 -- Akses tulis dilakukan backend via service role (bypass RLS). Frontend hanya SELECT.
 
