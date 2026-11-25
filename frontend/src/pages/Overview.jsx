@@ -46,6 +46,9 @@ export default function Overview() {
 
   const max = Math.max(...d.weekly_tenders.map((w) => w.count), 0)
   const weekTotal = d.weekly_tenders.reduce((a, w) => a + w.count, 0)
+  const topTenders = [...(d.top_tenders || [])]
+    .sort((a, b) => (b.relevance_score ?? 0) - (a.relevance_score ?? 0))
+    .slice(0, 3)
 
   return (
     <div className="dgrid">
@@ -85,7 +88,7 @@ export default function Overview() {
       <div className="card c7">
         <h2>{t('Tender prioritas')}</h2>
         <div className="sub" style={{ marginBottom: 8 }}>{t('Skor relevansi dari AI, perlu diverifikasi admin')}</div>
-        {d.top_tenders.length === 0 ? <Empty text="Belum ada tender yang dianalisis." /> : d.top_tenders.map((it, i) => {
+        {topTenders.length === 0 ? <Empty text="Belum ada tender yang dianalisis." /> : topTenders.map((it, i) => {
           const [cls, txt] = PRIO[it.priority]
           return (
             <div key={i} className={`row ${i === 0 ? 'first' : ''}`}>
@@ -118,7 +121,7 @@ export default function Overview() {
       <div className="card c6">
         <h2>{t('Aktivitas terbaru')}</h2>
         <div className="sub" style={{ marginBottom: 8 }}>{t('Dari log sistem')}</div>
-        {d.recent_activity.length === 0 ? <Empty text="Belum ada aktivitas." /> : d.recent_activity.map((l, i) => (
+        {d.recent_activity.length === 0 ? <Empty text="Belum ada aktivitas." /> : d.recent_activity.slice(0, 5).map((l, i) => (
           <div key={i} className={`log ${i === 0 ? 'first' : ''}`}><time>{t(dt(l.created_at, { dateStyle: 'short', timeStyle: 'short' }))}</time>[{l.level}] {l.component}: {l.message}</div>
         ))}
       </div>

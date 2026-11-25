@@ -9,7 +9,7 @@ import { EMAIL_TYPES, LANGUAGES, dt, emailTypeLabel, languageLabel, messageChip 
 import { useI18n } from '../lib/i18n'
 
 const EMPTY = { q: '', status: '', email_type: '', language: '' }
-const PER_PAGE = 20
+const PER_PAGE = 5
 
 function buildParams(filters, extra = {}) {
   const p = new URLSearchParams()
@@ -195,6 +195,8 @@ function MessagesTab({ leads, templates, onOpen, initialLeadId }) {
 
 function TemplatesTab({ templates, reload, isAdmin }) {
   const { t } = useI18n()
+  const PER_PAGE = 5
+  const [page, setPage] = useState(1)
   const [form, setForm] = useState({ name: '', email_type: 'company_intro', language: 'id', subject: '', body: '' })
   const [busy, setBusy] = useState(false)
   const [error, setError] = useState('')
@@ -210,7 +212,12 @@ function TemplatesTab({ templates, reload, isAdmin }) {
   }
 
   const remove = async (id) => { try { await api(`/api/outreach/templates/${id}`, { method: 'DELETE' }); reload() } catch (e) { setError(e.message) } }
-  const toggle = async (t) => { try { await api(`/api/outreach/templates/${t.id}`, { method: 'PATCH', body: JSON.stringify({ is_active: !t.is_active }) }); reload() } catch (e) { setError(e.message) } }
+  const toggle = async (tpl) => { try { await api(`/api/outreach/templates/${tpl.id}`, { method: 'PATCH', body: JSON.stringify({ is_active: !tpl.is_active }) }); reload() } catch (e) { setError(e.message) } }
+
+  const total = templates.length
+  const pages = Math.max(1, Math.ceil(total / PER_PAGE))
+  const pageSafe = Math.min(page, pages)
+  const items = templates.slice((pageSafe - 1) * PER_PAGE, pageSafe * PER_PAGE)
 
   return (
     <>
@@ -243,7 +250,7 @@ function TemplatesTab({ templates, reload, isAdmin }) {
         <h2>{t('Daftar template')}</h2>
         <div className="sub" style={{ marginBottom: 10 }}>{t('Template menjadi kerangka opsional saat AI menulis email.')}</div>
         {templates.length === 0 && <Empty text="Belum ada template." />}
-        {templates.map((tpl) => (
+        {items.map((tpl) => (
           <div key={tpl.id} className="row">
             <div className="t">
               <b>{tpl.name}</b>
@@ -254,6 +261,7 @@ function TemplatesTab({ templates, reload, isAdmin }) {
             {isAdmin && <button className="linkbtn" onClick={() => remove(tpl.id)}>{t('Hapus')}</button>}
           </div>
         ))}
+        <Pagination page={pageSafe} pages={pages} total={total} perPage={PER_PAGE} onPage={setPage} />
       </div>
     </>
   )
@@ -261,6 +269,8 @@ function TemplatesTab({ templates, reload, isAdmin }) {
 
 function CampaignsTab({ campaigns, reload, isAdmin }) {
   const { t } = useI18n()
+  const PER_PAGE = 5
+  const [page, setPage] = useState(1)
   const [form, setForm] = useState({ name: '', description: '' })
   const [busy, setBusy] = useState(false)
   const [error, setError] = useState('')
@@ -276,6 +286,11 @@ function CampaignsTab({ campaigns, reload, isAdmin }) {
   }
 
   const setStatus = async (c, status) => { try { await api(`/api/outreach/campaigns/${c.id}`, { method: 'PATCH', body: JSON.stringify({ status }) }); reload() } catch (e) { setError(e.message) } }
+
+  const total = campaigns.length
+  const pages = Math.max(1, Math.ceil(total / PER_PAGE))
+  const pageSafe = Math.min(page, pages)
+  const items = campaigns.slice((pageSafe - 1) * PER_PAGE, pageSafe * PER_PAGE)
 
   return (
     <>
@@ -296,7 +311,7 @@ function CampaignsTab({ campaigns, reload, isAdmin }) {
       <div className="card">
         <h2>{t('Daftar kampanye')}</h2>
         {campaigns.length === 0 && <Empty text="Belum ada kampanye." />}
-        {campaigns.map((c) => (
+        {items.map((c) => (
           <div key={c.id} className="row">
             <div className="t"><b>{c.name}</b><span className="sub">{c.description || '—'}</span></div>
             <span className={`chip ${c.status === 'active' ? 'OK' : 'L'}`}>{c.status}</span>
@@ -304,6 +319,7 @@ function CampaignsTab({ campaigns, reload, isAdmin }) {
             {isAdmin && c.status !== 'completed' && <button className="linkbtn" onClick={() => setStatus(c, 'completed')}>{t('Selesaikan')}</button>}
           </div>
         ))}
+        <Pagination page={pageSafe} pages={pages} total={total} perPage={PER_PAGE} onPage={setPage} />
       </div>
     </>
   )

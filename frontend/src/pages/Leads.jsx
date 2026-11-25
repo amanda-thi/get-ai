@@ -7,7 +7,7 @@ import Pagination from '../components/Pagination'
 import { LEAD_STATUSES, dt, statusChip } from '../lib/format'
 
 const EMPTY = { q: '', status: '', category: '', industry: '', province: '', sort: 'created_at', order: 'desc' }
-const PER_PAGE = 20
+const PER_PAGE = 5
 
 function buildParams(filters, extra = {}) {
   const p = new URLSearchParams()

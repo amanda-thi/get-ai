@@ -8,3 +8,4 @@ tzdata
 openpyxl>=3.1
 reportlab>=4.0
 apscheduler>=3.10,<4
+pyproc>=0.3.3

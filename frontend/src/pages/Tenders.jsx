@@ -7,7 +7,7 @@ import { CATEGORIES, dateOnly, dt, priorityChip, rupiah } from '../lib/format'
 import { useI18n } from '../lib/i18n'
 
 const EMPTY = { q: '', priority: '', category: '', source_id: '', status: '', sort: 'announced_at', order: 'desc' }
-const PER_PAGE = 20
+const PER_PAGE = 5
 
 function buildParams(filters, extra = {}) {
   const p = new URLSearchParams()
@@ -90,9 +90,6 @@ export default function Tenders() {
       {showCollect && (
         <div className="card">
           <h2>{t('Pencarian manual')}</h2>
-          <div className="sub" style={{ marginBottom: 12 }}>
-            {t('Menjalankan adapter sumber resmi (SPSE Nasional). Tanpa data dummy — bila sumber gagal, status dicatat.')}
-          </div>
           <div className="formgrid">
             <label className="field">{t('Tahun anggaran (pisahkan koma)')}
               <input value={collect.years} onChange={(e) => setCollect({ ...collect, years: e.target.value })} placeholder="2026, 2027" />

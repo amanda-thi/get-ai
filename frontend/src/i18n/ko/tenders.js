@@ -9,8 +9,6 @@ export default {
 
   // Pencarian manual
   'Pencarian manual': '수동 검색',
-  'Menjalankan adapter sumber resmi (SPSE Nasional). Tanpa data dummy — bila sumber gagal, status dicatat.':
-    '공식 출처 어댑터(SPSE Nasional)를 실행합니다. 더미 데이터는 사용하지 않으며, 출처 실패 시 상태가 기록됩니다.',
   'Tahun anggaran (pisahkan koma)': '회계 연도 (쉼표로 구분)',
   'Batas baris per tahun': '연도별 행 제한',
   'Ambil detail/jadwal (0 = tidak, N = N teratas)': '상세/일정 수집 (0 = 안 함, N = 상위 N개)',

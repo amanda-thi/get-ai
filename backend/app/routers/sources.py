@@ -65,7 +65,7 @@ def create_source(
     user: dict = Depends(require_role("admin")),
     db: SupabaseClient = Depends(get_db),
 ):
-    if payload.adapter_type not in ("sirup", "inaproc", "spse", "generic_html", "manual"):
+    if payload.adapter_type not in ("sirup", "inaproc", "spse", "generic_html", "manual", "pyproc"):
         raise HTTPException(422, "adapter_type tidak dikenal")
     try:
         rows = db.insert("tender_sources", payload.model_dump())

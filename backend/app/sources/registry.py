@@ -1,18 +1,25 @@
 """Registry adapter: `adapter_type` (kolom `tender_sources.adapter_type`) -> kelas adapter.
 
-Tipe yang didukung otomatis: `spse` (SPSE Nasional, publik, teruji) dan `inaproc`
-(API Gateway resmi, butuh token). Tipe lain dikenali skema tapi belum/tidak bisa
-diambil otomatis — dijelaskan alasannya, bukan dibiarkan gagal tanpa pesan.
+Tipe yang didukung otomatis:
+  - `pyproc` / `spse`: SPSE/LPSE via library pyproc (`Lpse`), mendukung host di
+    spse.inaproc.id (mis. nasional atau LPSE instansi). Ini pengganti scraping SPSE manual.
+  - `inaproc`: INAPROC API Gateway resmi (butuh token).
+
+Tipe lain dikenali skema tapi belum/tidak bisa diambil otomatis — dijelaskan alasannya,
+bukan dibiarkan gagal tanpa pesan.
 """
 from __future__ import annotations
 
 from ..config import Settings
 from .base import SourceAdapter, SourceError
 from .inaproc_api import InaprocApiAdapter
-from .spse_nasional import SpseNasionalAdapter
+from .pyproc_lpse import PyprocLpseAdapter
 
 ADAPTERS: dict[str, type[SourceAdapter]] = {
-    "spse": SpseNasionalAdapter,
+    # pyproc menggantikan scraping SPSE manual (lebih andal); 'spse' dipetakan ke
+    # implementasi pyproc agar sumber SPSE yang sudah ada langsung ikut bermigrasi.
+    "pyproc": PyprocLpseAdapter,
+    "spse": PyprocLpseAdapter,
     "inaproc": InaprocApiAdapter,
 }
 
